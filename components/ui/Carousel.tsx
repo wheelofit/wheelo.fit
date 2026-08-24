@@ -56,7 +56,9 @@ export function Carousel({ slides }: CarouselProps) {
     });
     emblaApi.on('reInit', onSelect);
     
-    setSlidesInView(Array.from(new Set([...emblaApi.slidesInView(), 0])));
+    setTimeout(() => {
+      setSlidesInView(Array.from(new Set([...emblaApi.slidesInView(), 0])));
+    }, 0);
 
     startAutoplay();
 

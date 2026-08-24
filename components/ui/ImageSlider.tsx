@@ -2,7 +2,6 @@
 
 import React, { useEffect, useCallback, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
-import { motion } from 'framer-motion';
 import Image from 'next/image';
 import styles from './ImageSlider.module.css';
 
@@ -37,7 +36,9 @@ export function ImageSlider({ images }: ImageSliderProps) {
     emblaApi.on('reInit', onSelect);
     
     // Initial trigger
-    setSlidesInView(Array.from(new Set([...emblaApi.slidesInView(), 0])));
+    setTimeout(() => {
+      setSlidesInView(Array.from(new Set([...emblaApi.slidesInView(), 0])));
+    }, 0);
 
     const autoplay = setInterval(() => {
       emblaApi.scrollNext();
