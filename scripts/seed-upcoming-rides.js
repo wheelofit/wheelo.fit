@@ -1,5 +1,4 @@
-import { PrismaClient } from '@prisma/client';
-
+const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 async function main() {
@@ -37,7 +36,7 @@ async function main() {
       title: 'Midnight Cycling - Friday',
       eventType: 'MIDNIGHT',
       date: friday,
-      timeSlot: '11:30 PM',
+      timeSlot: '10:15 PM',
       isActive: true,
     });
 
@@ -46,7 +45,7 @@ async function main() {
       title: 'Midnight Cycling - Saturday',
       eventType: 'MIDNIGHT',
       date: saturday,
-      timeSlot: '11:30 PM',
+      timeSlot: '10:15 PM',
       isActive: true,
     });
 
@@ -55,7 +54,7 @@ async function main() {
       title: 'Sunday Sunrise Ride',
       eventType: 'SUNDAY',
       date: sunday,
-      timeSlot: '06:00 AM',
+      timeSlot: '06:15 AM',
       isActive: true,
     });
   }

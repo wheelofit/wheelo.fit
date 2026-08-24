@@ -114,7 +114,7 @@ export function BookingForm({ title, events = [], buttonText = 'Book Now' }: Boo
             {selectedEvent ? (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
                 <span className={styles.eventTitle}>{selectedEvent.title}</span>
-                <span className={styles.eventDate}>{selectedEvent.date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' })}</span>
+                <span className={styles.eventDate}>{selectedEvent.date.toLocaleDateString('en-IN', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', timeZone: 'Asia/Kolkata' })}</span>
                 <span className={styles.eventTime}>{selectedEvent.timeSlot}</span>
               </div>
             ) : (
@@ -131,7 +131,7 @@ export function BookingForm({ title, events = [], buttonText = 'Book Now' }: Boo
           {isDropdownOpen && (
             <div className={styles.eventCardList}>
               {events.map(ev => {
-                const formattedDate = ev.date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+                const formattedDate = ev.date.toLocaleDateString('en-IN', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', timeZone: 'Asia/Kolkata' });
                 return (
                   <label 
                     key={ev.id} 

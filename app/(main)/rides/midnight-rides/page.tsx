@@ -82,11 +82,11 @@ export default async function MidnightRidesPage() {
   const itinerary = (
     <div key="itinerary" className={styles.timeline}>
       <div className={styles.timelineItem}>
-        <span className={styles.timelineTime}>10:30 PM</span>
+        <span className={styles.timelineTime}>10:15 PM</span>
         Meet at Worli for orientation, cycle allocation & refreshments
       </div>
       <div className={styles.timelineItem}>
-        <span className={styles.timelineTime}>11:00 PM</span>
+        <span className={styles.timelineTime}>10:45 PM</span>
         Ride begins from Worli
       </div>
       <div className={styles.timelineItem}>

@@ -77,11 +77,11 @@ export default async function SundayMorningPage() {
   const itinerary = (
     <div key="itinerary" className={styles.timeline}>
       <div className={styles.timelineItem}>
-        <span className={styles.timelineTime}>06:00 AM</span>
+        <span className={styles.timelineTime}>06:15 AM</span>
         Assemble at the starting point, brief introduction.
       </div>
       <div className={styles.timelineItem}>
-        <span className={styles.timelineTime}>06:15 AM</span>
+        <span className={styles.timelineTime}>06:45 AM</span>
         Start the ride and catch the beautiful sunrise.
       </div>
       <div className={styles.timelineItem}>
@@ -89,7 +89,7 @@ export default async function SundayMorningPage() {
         Breakfast break at a famous local spot.
       </div>
       <div className={styles.timelineItem}>
-        <span className={styles.timelineTime}>08:30 AM</span>
+        <span className={styles.timelineTime}>08:45 AM</span>
         Ride concludes.
       </div>
     </div>
