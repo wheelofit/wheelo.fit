@@ -5,13 +5,29 @@ import { cookies } from 'next/headers';
 import { encrypt } from '@/lib/auth';
 import prisma from '@/lib/prisma';
 import { redirect } from 'next/navigation';
+import CryptoJS from 'crypto-js';
 
 export async function login(formData: FormData) {
-  const username = formData.get('username') as string;
-  const password = formData.get('password') as string;
+  const encUsername = formData.get('username') as string;
+  const encPassword = formData.get('password') as string;
+
+  if (!encUsername || !encPassword) {
+    return { error: 'Username and password are required' };
+  }
+
+  const key = process.env.NEXT_PUBLIC_ENCRYPTION_KEY || 'wheelo-login-secret-key-123';
+  let username = '';
+  let password = '';
+  
+  try {
+    username = CryptoJS.AES.decrypt(encUsername, key).toString(CryptoJS.enc.Utf8);
+    password = CryptoJS.AES.decrypt(encPassword, key).toString(CryptoJS.enc.Utf8);
+  } catch (e) {
+    return { error: 'Decryption failed' };
+  }
 
   if (!username || !password) {
-    return { error: 'Username and password are required' };
+    return { error: 'Invalid credentials' };
   }
 
   const user = await prisma.adminUser.findUnique({

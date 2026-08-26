@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { login } from '../actions';
+import CryptoJS from 'crypto-js';
 import styles from './login.module.css';
 
 export default function LoginPage() {
@@ -11,6 +12,14 @@ export default function LoginPage() {
   async function handleSubmit(formData: FormData) {
     setPending(true);
     setError(null);
+    
+    const key = process.env.NEXT_PUBLIC_ENCRYPTION_KEY || 'wheelo-login-secret-key-123';
+    const encryptedUsername = CryptoJS.AES.encrypt(formData.get('username') as string, key).toString();
+    const encryptedPassword = CryptoJS.AES.encrypt(formData.get('password') as string, key).toString();
+    
+    formData.set('username', encryptedUsername);
+    formData.set('password', encryptedPassword);
+
     const res = await login(formData);
     if (res?.error) {
       setError(res.error);
