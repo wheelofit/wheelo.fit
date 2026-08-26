@@ -27,6 +27,10 @@ export async function updateJobPosting(id: string, data: { title: string; descri
 }
 
 export async function deleteJobPosting(id: string) {
+  await prisma.jobApplication.deleteMany({
+    where: { jobPostingId: id }
+  });
+
   await prisma.jobPosting.delete({
     where: { id }
   });
