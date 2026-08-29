@@ -6,7 +6,7 @@ import prisma from '@/lib/prisma';
 import Link from 'next/link';
 import { SectionAccordion } from '@/components/ui/SectionAccordion';
 
-import Image from 'next/image';
+import { OptimizedImage as Image } from '@/components/ui/OptimizedImage';
 import { CycleData } from './RentalsView';
 
 type CycleBooking = { startDate: Date; endDate: Date; quantity: number };

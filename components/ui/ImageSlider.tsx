@@ -2,7 +2,8 @@
 
 import React, { useEffect, useCallback, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
-import Image from 'next/image';
+import { OptimizedImage } from '@/components/ui/OptimizedImage';
+
 import styles from './ImageSlider.module.css';
 
 interface ImageSliderProps {
@@ -66,26 +67,22 @@ export function ImageSlider({ images }: ImageSliderProps) {
                 {hasBeenViewed ? (
                   <>
                     {/* Blurred Background Layer */}
-                    <Image 
-                      src={encodeURI(img.img)} 
+                    <OptimizedImage 
+                      src={img.img} 
                       alt="" 
                       className={styles.bgImage} 
-                      fill 
-                      priority={index === 0} 
-                      sizes="(max-width: 768px) 100vw, 1200px"
-                      style={{ objectFit: 'cover' }} 
+                      style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+                      loading={index === 0 ? "eager" : "lazy"}
                     />
                     <div className={styles.bgOverlay} />
                     
                     {/* Main Foreground Image */}
                     <div className={`${styles.imageWrapper} ${isActive ? styles.activeScale : ''}`}>
-                      <Image 
-                        src={encodeURI(img.img)}
+                      <OptimizedImage 
+                        src={img.img} 
                         alt="Gallery image"
-                        fill
-                        sizes="(max-width: 768px) 100vw, 1200px"
-                        priority={index === 0}
-                        style={{ objectFit: 'contain' }}
+                        style={{ objectFit: 'contain', width: '100%', height: '100%' }}
+                        loading={index === 0 ? "eager" : "lazy"}
                       />
                     </div>
                   </>

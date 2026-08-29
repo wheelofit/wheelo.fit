@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import Image from 'next/image';
+import { OptimizedImage as Image } from '@/components/ui/OptimizedImage';
 import { gsap } from 'gsap';
 
 import './Masonry.css';

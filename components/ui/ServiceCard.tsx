@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import { OptimizedImage as Image } from '@/components/ui/OptimizedImage';
 import styles from './ServiceCard.module.css';
 
 interface ServiceCardProps {

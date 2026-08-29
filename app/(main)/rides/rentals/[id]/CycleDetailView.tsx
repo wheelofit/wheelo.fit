@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import RentalBookingForm from '@/app/(main)/rentals/RentalBookingForm';
 import HeightChartModal from '../HeightChartModal';
 
-import Image from 'next/image';
+import { OptimizedImage as Image } from '@/components/ui/OptimizedImage';
 import { CycleData } from '../RentalsView';
 
 export default function CycleDetailView({ cycle }: { cycle: CycleData }) {

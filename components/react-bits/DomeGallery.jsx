@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useCallback } from 'react';
-import Image from 'next/image';
+import { OptimizedImage as Image } from '@/components/ui/OptimizedImage';
 import { useGesture } from '@use-gesture/react';
 import './DomeGallery.css';
 

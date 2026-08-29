@@ -5,7 +5,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BlurText } from '../react-bits/BlurText';
 import Link from 'next/link';
-import Image from 'next/image';
+import { OptimizedImage as Image } from '@/components/ui/OptimizedImage';
 import styles from './Carousel.module.css';
 
 interface CarouselSlide {
@@ -91,7 +91,7 @@ export function Carousel({ slides }: CarouselProps) {
                         style={{ position: 'relative', width: '100%', height: '100%' }}
                       >
                         <Image 
-                          src={encodeURI(slide.image)} 
+                          src={slide.image} 
                           alt={slide.title} 
                           fill
                           sizes="(max-width: 768px) 100vw, 1200px"
