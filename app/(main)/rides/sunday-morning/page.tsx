@@ -5,7 +5,7 @@ import prisma from '@/lib/prisma';
 import { RidePageLayout } from '@/components/ui/RidePageLayout';
 import styles from '@/components/ui/RidePageLayout.module.css';
 
-export const revalidate = 3600;
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: 'Sunday Morning Coastal Cycling | Wheelo.fit',

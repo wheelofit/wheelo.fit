@@ -11,7 +11,7 @@ export default function Testimonials() {
           src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=300&auto=format&fit=crop" 
           alt="Testimonial"
           fill
-          unoptimized
+          sizes="(max-width: 768px) 100vw, 33vw"
           style={{ objectFit: 'cover' }}
         />
       </div>

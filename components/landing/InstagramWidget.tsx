@@ -149,7 +149,7 @@ export function InstagramWidget() {
                     alt={post.caption || 'Wheelo.fit Instagram post'}
                     className={styles.image}
                     fill
-                    unoptimized
+                    sizes="(max-width: 768px) 50vw, 25vw"
                     style={{ objectFit: 'cover' }}
                   />
 

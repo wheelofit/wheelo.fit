@@ -15,7 +15,7 @@ export function ServiceCard({ title, description, image, href }: ServiceCardProp
   const CardContent = (
     <div className={styles.card}>
       <div className={styles.imageContainer}>
-        <Image src={image} alt={title} className={styles.image} fill unoptimized style={{ objectFit: 'cover' }} />
+        <Image src={image} alt={title} className={styles.image} fill sizes="(max-width: 768px) 100vw, 33vw" style={{ objectFit: 'cover' }} />
         <div className={styles.overlay} />
       </div>
       <div className={styles.content}>
