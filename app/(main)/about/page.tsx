@@ -15,7 +15,7 @@ export default function AboutPage() {
         <div className={styles.textBlock}>
           <h2>Our Story</h2>
           <p>
-            Founded in 2023, Wheelo.fit started with a simple mission: to make premium cycling experiences accessible to everyone. What began as a small group of enthusiasts doing midnight rides in Mumbai has now grown into a full-fledged fitness and outdoor adventure community.
+            Founded in 2023 by Devansh Raviprakash Gupta, Wheelo.fit started with a simple mission: to make premium cycling experiences accessible to everyone. What began as a small group of enthusiasts doing midnight rides in Mumbai has now grown into a full-fledged fitness and outdoor adventure community.
           </p>
           <p>
             Whether you are looking to burn calories in our high-octane indoor studios, or catch the sunrise on our scenic Sunday rides, we have something for every rider.

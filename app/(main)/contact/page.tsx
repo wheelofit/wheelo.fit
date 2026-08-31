@@ -15,6 +15,9 @@ export default function ContactPage() {
         <div className={styles.textBlock}>
           <h2>Contact Information</h2>
           <p>
+            <strong>Business Name:</strong> Devansh Raviprakash Gupta
+          </p>
+          <p>
             <strong>Address:</strong> <br />
             BMC parking lot, Next to Raheja Artesia,<br />
             Hind cycle marg, Worli, Mumbai 400030
