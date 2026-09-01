@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { OptimizedImage as Image } from '@/components/ui/OptimizedImage';
 import styles from './Footer.module.css';
 
 
@@ -25,7 +26,10 @@ export function Footer() {
     <footer className={styles.footer}>
       <div className={styles.container}>
         <div className={styles.topSection}>
-          <div className={styles.brandInfo}>
+          <div className={styles.brandInfo} style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'flex-start' }}>
+            <Link href="/">
+              <Image src="/logo.png" alt="Wheelo.fit Logo" width={80} height={80} />
+            </Link>
             <p className={styles.description}>
               A Community connected by Two wheels
             </p>

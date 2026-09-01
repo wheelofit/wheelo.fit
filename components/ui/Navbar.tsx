@@ -67,7 +67,7 @@ export function Navbar() {
       >
         <div className={styles.container}>
           <Link href="/" className={styles.logo}>
-            <Image src="/logo.png" alt="Wheelo.fit Logo" className={styles.logoImage} width={40} height={40} />
+            <Image src="/logo.png" alt="Wheelo.fit - Premium Cycling Experiences in Mumbai" className={styles.logoImage} width={55} height={55} />
             Wheelo.fit
           </Link>
           

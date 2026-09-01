@@ -1,4 +1,5 @@
 import React from 'react';
+import { Metadata } from 'next';
 import prisma from '@/lib/prisma';
 import { HeroCarousel } from '@/components/landing/HeroCarousel';
 import { AboutSection } from '@/components/landing/AboutSection';
@@ -27,6 +28,14 @@ const galleryImages = [
   { src: '/sunday-morning-cycling/cdec0adf-d6bb-4445-be4c-8480d493c13b.jpeg', alt: 'Morning sunrise' },
   { src: '/sunday-morning-cycling/A60632F4-8123-4B6A-8E8B-71EF9C10DB3E.jpeg', alt: 'Sunday morning coastal' }
 ];
+
+export const metadata: Metadata = {
+  title: "Wheelo.fit - Mumbai's Premier Cycling Community",
+  description: "Join Wheelo.fit for midnight cycling rides in Mumbai, Sunday morning coastal rides, and premium high-octane cycling classes. Rent a cycle and join the community.",
+  alternates: {
+    canonical: "/",
+  }
+};
 
 export default async function Home() {
   const testimonials = await prisma.testimonial.findMany({
