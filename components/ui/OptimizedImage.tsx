@@ -32,7 +32,7 @@ export function OptimizedImage({
         fill={fill}
         priority={priority}
         loading={loading}
-        {...(props as any)}
+        {...(props as Omit<ImageProps, "src" | "alt">)}
       />
     );
   }
@@ -48,7 +48,7 @@ export function OptimizedImage({
     typeof src === "string"
       ? src
       : src && typeof src === "object" && "src" in src
-        ? (src as any).src
+        ? (src as { src: string }).src
         : "";
 
   if (srcString) {

@@ -62,12 +62,12 @@ export async function getPaginatedAttendanceEvents(
   const processedEvents = events.map((event: any) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const presentCount = event.registrations.reduce(
-      (acc: number, r: any) => (r.isPresent ? acc + (r.ticketCount || 1) : acc),
+      (acc: number, r: { isPresent?: boolean; ticketCount?: number }) => (r.isPresent ? acc + (r.ticketCount || 1) : acc),
       0,
     );
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const totalCount = event.registrations.reduce(
-      (acc: number, r: any) => acc + (r.ticketCount || 1),
+      (acc: number, r: { ticketCount?: number }) => acc + (r.ticketCount || 1),
       0,
     );
 
