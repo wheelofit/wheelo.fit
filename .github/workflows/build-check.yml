@@ -8,20 +8,29 @@ on:
 
 jobs:
   lint:
-    name: Lint
+    name: Lint & Format
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20.x'
+          node-version: '22.x'
           cache: 'npm'
       - name: Install dependencies
-        run: npm install
+        run: npm ci --prefer-offline
+      - name: Format Code
+        run: npm run format
+      - name: Commit formatting changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "style: auto-format code"
       - name: Run Lint
         run: npm run lint
-        continue-on-error: true # Still won't fail the PR if lint fails
 
   build:
     name: Build
@@ -31,10 +40,10 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20.x'
+          node-version: '22.x'
           cache: 'npm'
       - name: Install dependencies
-        run: npm install
+        run: npm ci --prefer-offline
       - name: Create dummy .env file
         run: |
           echo 'DATABASE_URL="mongodb://localhost:27017/dummy"' >> .env
