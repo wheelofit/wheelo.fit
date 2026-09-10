@@ -1,6 +1,9 @@
 .layoutContainer {
   min-height: 100vh;
-  background-color: var(--background, #000); /* Assuming dark theme as per project style */
+  background-color: var(
+    --background,
+    #000
+  ); /* Assuming dark theme as per project style */
   color: var(--foreground, #fff);
 }
 
@@ -47,10 +50,14 @@
 }
 
 .sectionTitle::after {
-  content: '';
+  content: "";
   flex: 1;
   height: 2px;
-  background: linear-gradient(90deg, var(--primary, #1eb53a) 0%, transparent 100%);
+  background: linear-gradient(
+    90deg,
+    var(--primary, #1eb53a) 0%,
+    transparent 100%
+  );
   opacity: 0.3;
 }
 
@@ -84,8 +91,8 @@
   overflow-y: auto;
   position: relative;
   border: none;
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
   -webkit-overflow-scrolling: touch;
 }
 
@@ -116,7 +123,8 @@
   gap: 40px;
 }
 
-.incCard, .excCard {
+.incCard,
+.excCard {
   background: transparent;
   padding: 0;
   border: none;
@@ -132,7 +140,7 @@
 }
 
 .incCard h3::before {
-  content: '✦';
+  content: "✦";
   color: var(--primary);
 }
 
@@ -147,7 +155,7 @@
 }
 
 .excCard h3::before {
-  content: '✦';
+  content: "✦";
   color: #ff4d4d;
 }
 
@@ -166,7 +174,7 @@
 }
 
 .list.incList li::before {
-  content: '✓';
+  content: "✓";
   position: absolute;
   left: 0;
   top: 2px;
@@ -183,7 +191,7 @@
 }
 
 .list.excList li::before {
-  content: '✕';
+  content: "✕";
   position: absolute;
   left: 0;
   top: 2px;
@@ -207,13 +215,17 @@
 }
 
 .timeline::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 9px;
   top: 10px;
   bottom: 0;
   width: 2px;
-  background: linear-gradient(180deg, var(--primary) 0%, rgba(30, 181, 58, 0.1) 100%);
+  background: linear-gradient(
+    180deg,
+    var(--primary) 0%,
+    rgba(30, 181, 58, 0.1) 100%
+  );
 }
 
 .timelineItem {
@@ -224,7 +236,7 @@
 }
 
 .timelineItem::before {
-  content: '';
+  content: "";
   position: absolute;
   left: -35px;
   top: 6px;

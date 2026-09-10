@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import styles from './Footer.module.css';
+import React, { useState } from "react";
+import styles from "./Footer.module.css";
 
 interface FAQ {
   id: string;
@@ -19,16 +19,18 @@ export function FAQAccordion({ faqs }: { faqs: FAQ[] }) {
       <h3 className={styles.faqTitle}>Frequently Asked Questions</h3>
       <div className={styles.faqList}>
         {faqs.map((faq, index) => (
-          <div 
-            key={faq.id} 
-            className={`${styles.faqItem} ${openIndex === index ? styles.faqOpen : ''}`}
+          <div
+            key={faq.id}
+            className={`${styles.faqItem} ${openIndex === index ? styles.faqOpen : ""}`}
           >
-            <button 
-              className={styles.faqQuestion} 
+            <button
+              className={styles.faqQuestion}
               onClick={() => setOpenIndex(openIndex === index ? null : index)}
             >
               {faq.question}
-              <span className={styles.faqIcon}>{openIndex === index ? '−' : '+'}</span>
+              <span className={styles.faqIcon}>
+                {openIndex === index ? "−" : "+"}
+              </span>
             </button>
             <div className={styles.faqAnswerWrapper}>
               <p className={styles.faqAnswer}>{faq.answer}</p>

@@ -1,12 +1,12 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log('Generating next 32 events...');
-  
+  console.log("Generating next 32 events...");
+
   const today = new Date();
-  
+
   // Find the next Saturday
   const nextSaturday = new Date(today);
   nextSaturday.setDate(today.getDate() + ((6 - today.getDay() + 7) % 7 || 7));
@@ -22,23 +22,23 @@ async function main() {
   for (let i = 0; i < 16; i++) {
     // Midnight ride (Saturday night)
     const midnightDate = new Date(nextSaturday);
-    midnightDate.setDate(nextSaturday.getDate() + (i * 7));
+    midnightDate.setDate(nextSaturday.getDate() + i * 7);
     events.push({
-      title: 'Mumbai Midnight Cycling',
-      eventType: 'MIDNIGHT',
+      title: "Mumbai Midnight Cycling",
+      eventType: "MIDNIGHT",
       date: midnightDate,
-      timeSlot: '11:00 PM - 3:30 AM',
+      timeSlot: "11:00 PM - 3:30 AM",
       isActive: true,
     });
 
     // Sunday morning ride (Sunday morning)
     const sundayDate = new Date(nextSunday);
-    sundayDate.setDate(nextSunday.getDate() + (i * 7));
+    sundayDate.setDate(nextSunday.getDate() + i * 7);
     events.push({
-      title: 'Sunday Morning Coastal Ride',
-      eventType: 'SUNDAY',
+      title: "Sunday Morning Coastal Ride",
+      eventType: "SUNDAY",
       date: sundayDate,
-      timeSlot: '06:00 AM - 08:30 AM',
+      timeSlot: "06:00 AM - 08:30 AM",
       isActive: true,
     });
   }
@@ -49,13 +49,13 @@ async function main() {
     const existingEvent = await prisma.event.findFirst({
       where: {
         eventType: event.eventType,
-        date: event.date
-      }
+        date: event.date,
+      },
     });
 
     if (!existingEvent) {
       await prisma.event.create({
-        data: event
+        data: event,
       });
       createdCount++;
     }

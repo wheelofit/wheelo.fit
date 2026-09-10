@@ -1,17 +1,20 @@
-'use client';
+"use client";
 
-import React, { useEffect, useCallback, useState } from 'react';
-import useEmblaCarousel from 'embla-carousel-react';
-import { OptimizedImage } from '@/components/ui/OptimizedImage';
+import React, { useEffect, useCallback, useState } from "react";
+import useEmblaCarousel from "embla-carousel-react";
+import { OptimizedImage } from "@/components/ui/OptimizedImage";
 
-import styles from './ImageSlider.module.css';
+import styles from "./ImageSlider.module.css";
 
 interface ImageSliderProps {
-  images: { id: string; img: string; }[];
+  images: { id: string; img: string }[];
 }
 
 export function ImageSlider({ images }: ImageSliderProps) {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'center' });
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: true,
+    align: "center",
+  });
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   const [slidesInView, setSlidesInView] = useState<number[]>([0]);
@@ -27,15 +30,15 @@ export function ImageSlider({ images }: ImageSliderProps) {
 
   useEffect(() => {
     if (!emblaApi) return;
-    emblaApi.on('select', onSelect);
-    emblaApi.on('slidesInView', () => {
+    emblaApi.on("select", onSelect);
+    emblaApi.on("slidesInView", () => {
       setSlidesInView((prev) => {
         const inView = emblaApi.slidesInView();
         return Array.from(new Set([...prev, ...inView]));
       });
     });
-    emblaApi.on('reInit', onSelect);
-    
+    emblaApi.on("reInit", onSelect);
+
     // Initial trigger
     setTimeout(() => {
       setSlidesInView(Array.from(new Set([...emblaApi.slidesInView(), 0])));
@@ -46,9 +49,9 @@ export function ImageSlider({ images }: ImageSliderProps) {
     }, 4000);
     return () => {
       clearInterval(autoplay);
-      emblaApi.off('select', onSelect);
-      emblaApi.off('reInit', onSelect);
-      emblaApi.off('slidesInView', onSelect);
+      emblaApi.off("select", onSelect);
+      emblaApi.off("reInit", onSelect);
+      emblaApi.off("slidesInView", onSelect);
     };
   }, [emblaApi, onSelect]);
 
@@ -61,27 +64,37 @@ export function ImageSlider({ images }: ImageSliderProps) {
           {images.map((img, index) => {
             const isActive = index === selectedIndex;
             const hasBeenViewed = slidesInView.includes(index);
-            
+
             return (
               <div className={styles.slide} key={img.id}>
                 {hasBeenViewed ? (
                   <>
                     {/* Blurred Background Layer */}
-                    <OptimizedImage 
-                      src={img.img} 
-                      alt="" 
-                      className={styles.bgImage} 
-                      style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+                    <OptimizedImage
+                      src={img.img}
+                      alt=""
+                      className={styles.bgImage}
+                      style={{
+                        objectFit: "cover",
+                        width: "100%",
+                        height: "100%",
+                      }}
                       loading={index === 0 ? "eager" : "lazy"}
                     />
                     <div className={styles.bgOverlay} />
-                    
+
                     {/* Main Foreground Image */}
-                    <div className={`${styles.imageWrapper} ${isActive ? styles.activeScale : ''}`}>
-                      <OptimizedImage 
-                        src={img.img} 
+                    <div
+                      className={`${styles.imageWrapper} ${isActive ? styles.activeScale : ""}`}
+                    >
+                      <OptimizedImage
+                        src={img.img}
                         alt="Gallery image"
-                        style={{ objectFit: 'contain', width: '100%', height: '100%' }}
+                        style={{
+                          objectFit: "contain",
+                          width: "100%",
+                          height: "100%",
+                        }}
                         loading={index === 0 ? "eager" : "lazy"}
                       />
                     </div>
@@ -92,10 +105,14 @@ export function ImageSlider({ images }: ImageSliderProps) {
           })}
         </div>
       </div>
-      
+
       <div className={styles.controls}>
-        <button className={styles.btn} onClick={() => emblaApi?.scrollPrev()}>&#10094;</button>
-        <button className={styles.btn} onClick={() => emblaApi?.scrollNext()}>&#10095;</button>
+        <button className={styles.btn} onClick={() => emblaApi?.scrollPrev()}>
+          &#10094;
+        </button>
+        <button className={styles.btn} onClick={() => emblaApi?.scrollNext()}>
+          &#10095;
+        </button>
       </div>
     </div>
   );

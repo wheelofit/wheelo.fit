@@ -1,44 +1,45 @@
-'use client';
+"use client";
 
-import React from 'react';
+import React from "react";
 
 export default function WhatsAppFAB() {
-  const phoneNumber = '918879045474';
-  const message = "Hi Wheelo.fit, I'd like to know more about your cycling classes.";
+  const phoneNumber = "918879045474";
+  const message =
+    "Hi Wheelo.fit, I'd like to know more about your cycling classes.";
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
   return (
-    <a 
+    <a
       href={whatsappUrl}
       target="_blank"
       rel="noopener noreferrer"
       style={{
-        position: 'fixed',
-        bottom: '100px', // Stacked above EnquireModalFAB which is at 30px
-        right: '30px',
-        background: '#25D366', // WhatsApp Green
-        color: '#fff',
-        border: 'none',
-        borderRadius: '50px',
-        padding: '16px 24px',
-        fontSize: '1.1rem',
-        fontWeight: 'bold',
-        textDecoration: 'none',
-        cursor: 'pointer',
-        boxShadow: '0 10px 25px rgba(37, 211, 102, 0.4)',
+        position: "fixed",
+        bottom: "100px", // Stacked above EnquireModalFAB which is at 30px
+        right: "30px",
+        background: "#25D366", // WhatsApp Green
+        color: "#fff",
+        border: "none",
+        borderRadius: "50px",
+        padding: "16px 24px",
+        fontSize: "1.1rem",
+        fontWeight: "bold",
+        textDecoration: "none",
+        cursor: "pointer",
+        boxShadow: "0 10px 25px rgba(37, 211, 102, 0.4)",
         zIndex: 90,
-        display: 'flex',
-        alignItems: 'center',
-        gap: '10px',
-        transition: 'transform 0.2s, box-shadow 0.2s',
+        display: "flex",
+        alignItems: "center",
+        gap: "10px",
+        transition: "transform 0.2s, box-shadow 0.2s",
       }}
       onMouseOver={(e) => {
-        e.currentTarget.style.transform = 'translateY(-3px)';
-        e.currentTarget.style.boxShadow = '0 15px 35px rgba(37, 211, 102, 0.5)';
+        e.currentTarget.style.transform = "translateY(-3px)";
+        e.currentTarget.style.boxShadow = "0 15px 35px rgba(37, 211, 102, 0.5)";
       }}
       onMouseOut={(e) => {
-        e.currentTarget.style.transform = 'translateY(0)';
-        e.currentTarget.style.boxShadow = '0 10px 25px rgba(37, 211, 102, 0.4)';
+        e.currentTarget.style.transform = "translateY(0)";
+        e.currentTarget.style.boxShadow = "0 10px 25px rgba(37, 211, 102, 0.4)";
       }}
     >
       <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">

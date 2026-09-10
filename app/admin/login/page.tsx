@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { login } from '../actions';
-import CryptoJS from 'crypto-js';
-import styles from './login.module.css';
+import { useState } from "react";
+import { login } from "../actions";
+import CryptoJS from "crypto-js";
+import styles from "./login.module.css";
 
 export default function LoginPage() {
   const [error, setError] = useState<string | null>(null);
@@ -12,13 +12,20 @@ export default function LoginPage() {
   async function handleSubmit(formData: FormData) {
     setPending(true);
     setError(null);
-    
-    const key = process.env.NEXT_PUBLIC_ENCRYPTION_KEY || 'wheelo-login-secret-key-123';
-    const encryptedUsername = CryptoJS.AES.encrypt(formData.get('username') as string, key).toString();
-    const encryptedPassword = CryptoJS.AES.encrypt(formData.get('password') as string, key).toString();
-    
-    formData.set('username', encryptedUsername);
-    formData.set('password', encryptedPassword);
+
+    const key =
+      process.env.NEXT_PUBLIC_ENCRYPTION_KEY || "wheelo-login-secret-key-123";
+    const encryptedUsername = CryptoJS.AES.encrypt(
+      formData.get("username") as string,
+      key,
+    ).toString();
+    const encryptedPassword = CryptoJS.AES.encrypt(
+      formData.get("password") as string,
+      key,
+    ).toString();
+
+    formData.set("username", encryptedUsername);
+    formData.set("password", encryptedPassword);
 
     const res = await login(formData);
     if (res?.error) {
@@ -42,7 +49,7 @@ export default function LoginPage() {
             <input type="password" id="password" name="password" required />
           </div>
           <button type="submit" disabled={pending} className={styles.submitBtn}>
-            {pending ? 'Logging in...' : 'Login'}
+            {pending ? "Logging in..." : "Login"}
           </button>
         </form>
       </div>

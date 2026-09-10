@@ -7,7 +7,7 @@
   --surface: #111f15;
   --surface-hover: #192b1e;
   --border: #1e3323;
-  --font-sans: 'Outfit', 'Inter', sans-serif;
+  --font-sans: "Outfit", "Inter", sans-serif;
 }
 
 * {
@@ -56,35 +56,49 @@ body {
 }
 
 @keyframes floatOrb {
-  0% { transform: scale(1) translate(0, 0); }
-  50% { transform: scale(1.15) translate(-4vw, 4vh); }
-  100% { transform: scale(0.95) translate(2vw, -2vh); }
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  50% {
+    transform: scale(1.15) translate(-4vw, 4vh);
+  }
+  100% {
+    transform: scale(0.95) translate(2vw, -2vh);
+  }
 }
 
 /* Elegant faint grid overlay directly on the body or a pseudo element */
 body::before {
-  content: '';
+  content: "";
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
   opacity: 0.06;
-  background-image: 
+  background-image:
     linear-gradient(rgba(255, 255, 255, 1) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 1) 1px, transparent 1px);
   background-size: 100px 100px;
   background-position: center center;
   mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
-  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(
+    ellipse at center,
+    black 30%,
+    transparent 80%
+  );
   animation: drift 25s linear infinite;
   z-index: -2;
   pointer-events: none;
 }
 
 @keyframes drift {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(100px); }
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100px);
+  }
 }
 
 a {
@@ -114,7 +128,8 @@ button {
 }
 
 /* Lenis base CSS */
-html.lenis, html.lenis body {
+html.lenis,
+html.lenis body {
   height: auto;
 }
 .lenis.lenis-smooth {
@@ -130,12 +145,11 @@ html.lenis, html.lenis body {
   pointer-events: none;
 }
 
-
 /* Loaders */
 .page-spinner {
   width: 48px;
   height: 48px;
-  border: 4px solid rgba(255,255,255,0.1);
+  border: 4px solid rgba(255, 255, 255, 0.1);
   border-radius: 50%;
   border-top-color: var(--primary);
   animation: spin 1s ease-in-out infinite;
@@ -145,7 +159,7 @@ html.lenis, html.lenis body {
   display: inline-block;
   width: 16px;
   height: 16px;
-  border: 2px solid rgba(255,255,255,0.3);
+  border: 2px solid rgba(255, 255, 255, 0.3);
   border-radius: 50%;
   border-top-color: #fff;
   animation: spin 1s ease-in-out infinite;
@@ -154,6 +168,7 @@ html.lenis, html.lenis body {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
-

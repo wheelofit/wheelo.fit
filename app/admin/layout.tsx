@@ -1,14 +1,14 @@
-import React from 'react';
-import { cookies } from 'next/headers';
-import { decrypt } from '@/lib/auth';
-import AdminLayoutClient from './components/AdminLayoutClient';
+import React from "react";
+import { cookies } from "next/headers";
+import { decrypt } from "@/lib/auth";
+import AdminLayoutClient from "./components/AdminLayoutClient";
 
 export default async function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const sessionCookie = (await cookies()).get('admin_session')?.value;
+  const sessionCookie = (await cookies()).get("admin_session")?.value;
   const session = await decrypt(sessionCookie);
 
   // If there's no session, it's likely the login page or middleware will handle it.

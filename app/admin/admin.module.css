@@ -76,21 +76,21 @@
 @media (max-width: 768px) {
   .sidebar {
     transform: translateX(-100%);
-    box-shadow: 2px 0 15px rgba(0,0,0,0.5);
+    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.5);
   }
-  
+
   .sidebarOpen {
     transform: translateX(0);
   }
-  
+
   .mainWrapper {
     margin-left: 0;
   }
-  
+
   .hamburgerBtn {
     display: block;
   }
-  
+
   .overlayOpen {
     display: block;
   }
@@ -98,7 +98,7 @@
   .header {
     padding: 1rem;
   }
-  
+
   .mainContent {
     padding: 1rem;
   }

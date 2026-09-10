@@ -3,7 +3,7 @@ name: Generate Upcoming Ride Events
 on:
   schedule:
     # Run every Sunday at midnight UTC
-    - cron: '0 0 * * 0'
+    - cron: "0 0 * * 0"
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
 
 jobs:
@@ -17,7 +17,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: "20"
 
       - name: Install dependencies
         run: npm install

@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { submitCycleClassInquiry } from '@/app/(main)/rides/cycle-classes/actions';
-import styles from '@/components/ui/BookingForm.module.css';
+import { useState } from "react";
+import { submitCycleClassInquiry } from "@/app/(main)/rides/cycle-classes/actions";
+import styles from "@/components/ui/BookingForm.module.css";
 
 export default function CycleClassForm() {
   const [pending, setPending] = useState(false);
@@ -20,47 +20,102 @@ export default function CycleClassForm() {
       setError(res.error);
     } else if (res?.success) {
       setSuccess(res.success);
-      (document.getElementById('cycle-class-form') as HTMLFormElement)?.reset();
+      (document.getElementById("cycle-class-form") as HTMLFormElement)?.reset();
     }
-    
+
     setPending(false);
   }
 
   return (
     <div className={styles.formContainer}>
       <h3 className={styles.title}>Inquire About Cycle Classes</h3>
-      
-      {success && <div style={{ color: '#4dff4d', background: 'rgba(77,255,77,0.1)', padding: '1rem', borderRadius: '8px', marginBottom: '1rem', fontSize: '0.9rem' }}>{success}</div>}
-      {error && <div style={{ color: '#ff4d4d', background: 'rgba(255,77,77,0.1)', padding: '1rem', borderRadius: '8px', marginBottom: '1rem', fontSize: '0.9rem' }}>{error}</div>}
+
+      {success && (
+        <div
+          style={{
+            color: "#4dff4d",
+            background: "rgba(77,255,77,0.1)",
+            padding: "1rem",
+            borderRadius: "8px",
+            marginBottom: "1rem",
+            fontSize: "0.9rem",
+          }}
+        >
+          {success}
+        </div>
+      )}
+      {error && (
+        <div
+          style={{
+            color: "#ff4d4d",
+            background: "rgba(255,77,77,0.1)",
+            padding: "1rem",
+            borderRadius: "8px",
+            marginBottom: "1rem",
+            fontSize: "0.9rem",
+          }}
+        >
+          {error}
+        </div>
+      )}
 
       <form id="cycle-class-form" action={handleSubmit} className={styles.form}>
         <div className={styles.field}>
-          <label htmlFor="name" className={styles.label}>Name <span style={{color: 'red'}}>*</span></label>
-          <input type="text" id="name" name="name" required className={styles.input} />
+          <label htmlFor="name" className={styles.label}>
+            Name <span style={{ color: "red" }}>*</span>
+          </label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            className={styles.input}
+          />
         </div>
 
         <div className={styles.field}>
-          <label htmlFor="phone" className={styles.label}>WhatsApp no <span style={{color: 'red'}}>*</span></label>
-          <input type="tel" id="phone" name="phone" required className={styles.input} placeholder="+91 081234 56789" />
+          <label htmlFor="phone" className={styles.label}>
+            WhatsApp no <span style={{ color: "red" }}>*</span>
+          </label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            required
+            className={styles.input}
+            placeholder="+91 081234 56789"
+          />
         </div>
 
         <div className={styles.field}>
-          <label htmlFor="area" className={styles.label}>Area (Locality)</label>
+          <label htmlFor="area" className={styles.label}>
+            Area (Locality)
+          </label>
           <input type="text" id="area" name="area" className={styles.input} />
         </div>
 
         <div className={styles.field}>
-          <label htmlFor="height" className={styles.label}>Height</label>
-          <input type="text" id="height" name="height" className={styles.input} />
+          <label htmlFor="height" className={styles.label}>
+            Height
+          </label>
+          <input
+            type="text"
+            id="height"
+            name="height"
+            className={styles.input}
+          />
         </div>
 
-        <button 
-          type="submit" 
+        <button
+          type="submit"
           className={styles.submitBtn}
           disabled={pending}
-          style={{ opacity: pending ? 0.7 : 1, cursor: pending ? 'not-allowed' : 'pointer' }}
+          style={{
+            opacity: pending ? 0.7 : 1,
+            cursor: pending ? "not-allowed" : "pointer",
+          }}
         >
-          {pending ? 'Submitting...' : 'Submit Inquiry'}
+          {pending ? "Submitting..." : "Submit Inquiry"}
         </button>
       </form>
     </div>

@@ -1,18 +1,25 @@
-'use server';
+"use server";
 
-import prisma from '@/lib/prisma';
+import prisma from "@/lib/prisma";
 
-
-export async function getCycleAvailabilityMap(cycleId: string, month: number, year: number) {
+export async function getCycleAvailabilityMap(
+  cycleId: string,
+  month: number,
+  year: number,
+) {
   try {
     type RentalCycle = { id: string; isActive: boolean; quantity: number };
     type RentalBooking = { startDate: Date; endDate: Date; quantity: number };
     const prismaRental = prisma as unknown as {
-      rentalCycle: { findUnique: (args: unknown) => Promise<RentalCycle | null> };
+      rentalCycle: {
+        findUnique: (args: unknown) => Promise<RentalCycle | null>;
+      };
       rentalBooking: { findMany: (args: unknown) => Promise<RentalBooking[]> };
     };
 
-    const cycle = await prismaRental.rentalCycle.findUnique({ where: { id: cycleId } });
+    const cycle = await prismaRental.rentalCycle.findUnique({
+      where: { id: cycleId },
+    });
     if (!cycle || !cycle.isActive) return null;
 
     const startDate = new Date(year, month, 1);
@@ -22,12 +29,9 @@ export async function getCycleAvailabilityMap(cycleId: string, month: number, ye
     const bookings = await prismaRental.rentalBooking.findMany({
       where: {
         cycleId,
-        status: 'CONFIRMED',
-        AND: [
-          { startDate: { lte: endDate } },
-          { endDate: { gte: startDate } }
-        ]
-      }
+        status: "CONFIRMED",
+        AND: [{ startDate: { lte: endDate } }, { endDate: { gte: startDate } }],
+      },
     });
 
     const availabilityMap: Record<string, number> = {};
@@ -43,7 +47,11 @@ export async function getCycleAvailabilityMap(cycleId: string, month: number, ye
       for (let day = 1; day <= totalDays; day++) {
         const currentDate = new Date(targetYear, normalizedMonth, day);
         // Adjust for local timezone offset when generating string
-        const dateStr = new Date(currentDate.getTime() - (currentDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
+        const dateStr = new Date(
+          currentDate.getTime() - currentDate.getTimezoneOffset() * 60000,
+        )
+          .toISOString()
+          .split("T")[0];
 
         const overlappingBookings = bookings.filter((b: RentalBooking) => {
           const bStart = new Date(b.startDate);
@@ -55,7 +63,10 @@ export async function getCycleAvailabilityMap(cycleId: string, month: number, ye
           return cDate >= bStart && cDate <= bEnd;
         });
 
-        const bookedQty = overlappingBookings.reduce((sum: number, b: RentalBooking) => sum + b.quantity, 0);
+        const bookedQty = overlappingBookings.reduce(
+          (sum: number, b: RentalBooking) => sum + b.quantity,
+          0,
+        );
         availabilityMap[dateStr] = Math.max(0, cycle.quantity - bookedQty);
       }
     }
@@ -67,28 +78,40 @@ export async function getCycleAvailabilityMap(cycleId: string, month: number, ye
   }
 }
 
-export async function checkAvailability(cycleId: string, startDateStr: string, durationValue: number, durationUnit: string, requestedQuantity: number) {
+export async function checkAvailability(
+  cycleId: string,
+  startDateStr: string,
+  durationValue: number,
+  durationUnit: string,
+  requestedQuantity: number,
+) {
   try {
     type RentalCycle = { id: string; isActive: boolean; quantity: number };
     type RentalBooking = { startDate: Date; endDate: Date; quantity: number };
     const prismaRental = prisma as unknown as {
-      rentalCycle: { findUnique: (args: unknown) => Promise<RentalCycle | null> };
+      rentalCycle: {
+        findUnique: (args: unknown) => Promise<RentalCycle | null>;
+      };
       rentalBooking: { findMany: (args: unknown) => Promise<RentalBooking[]> };
     };
 
-    const cycle = await prismaRental.rentalCycle.findUnique({ where: { id: cycleId } });
-    if (!cycle || !cycle.isActive) return { available: false, reason: 'Cycle not available.' };
+    const cycle = await prismaRental.rentalCycle.findUnique({
+      where: { id: cycleId },
+    });
+    if (!cycle || !cycle.isActive)
+      return { available: false, reason: "Cycle not available." };
 
-    if (requestedQuantity > cycle.quantity) return { available: false, reason: 'Not enough total stock.' };
+    if (requestedQuantity > cycle.quantity)
+      return { available: false, reason: "Not enough total stock." };
 
     const startDate = new Date(startDateStr);
     const endDate = new Date(startDate);
 
-    if (durationUnit === 'DAYS') {
+    if (durationUnit === "DAYS") {
       endDate.setDate(endDate.getDate() + durationValue - 1);
-    } else if (durationUnit === 'MONTHS') {
+    } else if (durationUnit === "MONTHS") {
       // Approximate 30 days per month
-      endDate.setDate(endDate.getDate() + (durationValue * 30) - 1);
+      endDate.setDate(endDate.getDate() + durationValue * 30 - 1);
     } else {
       // For HOURS or other, keep same day
     }
@@ -97,61 +120,81 @@ export async function checkAvailability(cycleId: string, startDateStr: string, d
     const overlappingBookings = await prismaRental.rentalBooking.findMany({
       where: {
         cycleId,
-        status: 'CONFIRMED',
-        AND: [
-          { startDate: { lte: endDate } },
-          { endDate: { gte: startDate } }
-        ]
-      }
+        status: "CONFIRMED",
+        AND: [{ startDate: { lte: endDate } }, { endDate: { gte: startDate } }],
+      },
     });
 
-    const bookedQuantity = overlappingBookings.reduce((sum: number, b: RentalBooking) => sum + b.quantity, 0);
+    const bookedQuantity = overlappingBookings.reduce(
+      (sum: number, b: RentalBooking) => sum + b.quantity,
+      0,
+    );
     const availableQty = cycle.quantity - bookedQuantity;
 
     if (availableQty >= requestedQuantity) {
       return { available: true, availableQty };
     } else {
-      return { available: false, reason: `Only ${availableQty} available for these dates.` };
+      return {
+        available: false,
+        reason: `Only ${availableQty} available for these dates.`,
+      };
     }
   } catch (error) {
     console.error(error);
-    return { available: false, reason: 'Error checking availability.' };
+    return { available: false, reason: "Error checking availability." };
   }
 }
 
 export async function bookRental(formData: FormData) {
-  const cycleId = formData.get('cycleId') as string;
-  const startDateStr = formData.get('startDate') as string;
-  const durationValue = parseInt(formData.get('durationValue') as string, 10);
-  const durationUnit = formData.get('durationUnit') as string;
-  const quantity = parseInt(formData.get('quantity') as string, 10);
+  const cycleId = formData.get("cycleId") as string;
+  const startDateStr = formData.get("startDate") as string;
+  const durationValue = parseInt(formData.get("durationValue") as string, 10);
+  const durationUnit = formData.get("durationUnit") as string;
+  const quantity = parseInt(formData.get("quantity") as string, 10);
 
-  const name = formData.get('name') as string;
-  const email = formData.get('email') as string;
-  const phone = formData.get('phone') as string;
+  const name = formData.get("name") as string;
+  const email = formData.get("email") as string;
+  const phone = formData.get("phone") as string;
 
-  if (!cycleId || !startDateStr || isNaN(durationValue) || !durationUnit || isNaN(quantity) || !name || !email || !phone) {
-    return { error: 'Missing required fields.' };
+  if (
+    !cycleId ||
+    !startDateStr ||
+    isNaN(durationValue) ||
+    !durationUnit ||
+    isNaN(quantity) ||
+    !name ||
+    !email ||
+    !phone
+  ) {
+    return { error: "Missing required fields." };
   }
 
   // Check availability again before booking
-  const avail = await checkAvailability(cycleId, startDateStr, durationValue, durationUnit, quantity);
+  const avail = await checkAvailability(
+    cycleId,
+    startDateStr,
+    durationValue,
+    durationUnit,
+    quantity,
+  );
 
   if (!avail.available) {
-    return { error: avail.reason || 'Cycle is no longer available.' };
+    return { error: avail.reason || "Cycle is no longer available." };
   }
 
   const startDate = new Date(startDateStr);
   const endDate = new Date(startDate);
 
-  if (durationUnit === 'DAYS') {
+  if (durationUnit === "DAYS") {
     endDate.setDate(endDate.getDate() + durationValue - 1);
-  } else if (durationUnit === 'MONTHS') {
-    endDate.setDate(endDate.getDate() + (durationValue * 30) - 1);
+  } else if (durationUnit === "MONTHS") {
+    endDate.setDate(endDate.getDate() + durationValue * 30 - 1);
   }
 
   try {
-    const prismaBooking = prisma as unknown as { rentalBooking: { create: (args: unknown) => Promise<unknown> } };
+    const prismaBooking = prisma as unknown as {
+      rentalBooking: { create: (args: unknown) => Promise<unknown> };
+    };
     await prismaBooking.rentalBooking.create({
       data: {
         cycleId,
@@ -161,13 +204,13 @@ export async function bookRental(formData: FormData) {
         name,
         email,
         phone,
-        status: 'CONFIRMED'
-      }
+        status: "CONFIRMED",
+      },
     });
 
-    return { success: 'Booking confirmed successfully!' };
+    return { success: "Booking confirmed successfully!" };
   } catch (error) {
     console.error(error);
-    return { error: 'Failed to complete booking.' };
+    return { error: "Failed to complete booking." };
   }
 }

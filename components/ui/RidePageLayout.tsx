@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { StickyBottomBar } from './StickyBottomBar';
-import { ImageSlider } from './ImageSlider';
-import { SectionAccordion } from './SectionAccordion';
-import styles from './RidePageLayout.module.css';
+import React, { useState, useEffect } from "react";
+import { StickyBottomBar } from "./StickyBottomBar";
+import { ImageSlider } from "./ImageSlider";
+import { SectionAccordion } from "./SectionAccordion";
+import styles from "./RidePageLayout.module.css";
 
 interface Section {
   title: string;
@@ -40,12 +40,12 @@ export function RidePageLayout({
 
   useEffect(() => {
     if (isFormVisible) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = "auto";
     }
     return () => {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = "auto";
     };
   }, [isFormVisible]);
 
@@ -84,10 +84,17 @@ export function RidePageLayout({
       </main>
 
       {isFormVisible && (
-        <div className={styles.modalOverlay} onClick={() => setIsFormVisible(false)}>
-          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()} data-lenis-prevent>
-            <button 
-              className={styles.modalCloseBtn} 
+        <div
+          className={styles.modalOverlay}
+          onClick={() => setIsFormVisible(false)}
+        >
+          <div
+            className={styles.modalContent}
+            onClick={(e) => e.stopPropagation()}
+            data-lenis-prevent
+          >
+            <button
+              className={styles.modalCloseBtn}
               onClick={() => setIsFormVisible(false)}
             >
               &times;
@@ -97,9 +104,9 @@ export function RidePageLayout({
         </div>
       )}
 
-      <StickyBottomBar 
-        priceText={priceText} 
-        onBookNowClick={handleBookNowClick} 
+      <StickyBottomBar
+        priceText={priceText}
+        onBookNowClick={handleBookNowClick}
       />
     </div>
   );

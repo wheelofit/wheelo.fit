@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import styles from './SectionAccordion.module.css';
+import React, { useState } from "react";
+import styles from "./SectionAccordion.module.css";
 
 interface Section {
   title: string;
@@ -16,12 +16,12 @@ export function SectionAccordion({ sections }: { sections: Section[] }) {
   return (
     <div className={styles.accordionSection}>
       {sections.map((section, index) => (
-        <div 
-          key={index} 
-          className={`${styles.accordionItem} ${openIndex === index ? styles.accordionOpen : ''}`}
+        <div
+          key={index}
+          className={`${styles.accordionItem} ${openIndex === index ? styles.accordionOpen : ""}`}
         >
-          <button 
-            className={styles.accordionHeader} 
+          <button
+            className={styles.accordionHeader}
             onClick={() => setOpenIndex(openIndex === index ? null : index)}
           >
             {section.title}
@@ -29,9 +29,7 @@ export function SectionAccordion({ sections }: { sections: Section[] }) {
           </button>
           <div className={styles.accordionContentWrapper}>
             <div className={styles.accordionContentInner}>
-              <div className={styles.accordionContent}>
-                {section.content}
-              </div>
+              <div className={styles.accordionContent}>{section.content}</div>
             </div>
           </div>
         </div>

@@ -1,16 +1,17 @@
-import nodemailer from 'nodemailer';
+import nodemailer from "nodemailer";
 
 const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST || 'smtp.gmail.com',
-  port: parseInt(process.env.EMAIL_PORT || '587'),
-  secure: process.env.EMAIL_PORT === '465', // true for 465, false for other ports
+  host: process.env.EMAIL_HOST || "smtp.gmail.com",
+  port: parseInt(process.env.EMAIL_PORT || "587"),
+  secure: process.env.EMAIL_PORT === "465", // true for 465, false for other ports
   auth: {
     user: process.env.GMAIL_USER || process.env.EMAIL_USER,
     pass: process.env.GMAIL_APP_PASSWORD || process.env.EMAIL_PASS,
   },
 });
 
-const adminEmail = process.env.ADMIN_EMAIL || process.env.GMAIL_USER || process.env.EMAIL_USER;
+const adminEmail =
+  process.env.ADMIN_EMAIL || process.env.GMAIL_USER || process.env.EMAIL_USER;
 
 interface Registration {
   name: string;
@@ -44,8 +45,11 @@ interface Cycle {
   type: string;
 }
 
-const eventTicketTemplate = (registration: Registration, event: EventDetails) => {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://wheelo.fit';
+const eventTicketTemplate = (
+  registration: Registration,
+  event: EventDetails,
+) => {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://wheelo.fit";
   const qrUrl = `${baseUrl}/ticket/${registration.ticketCode}`;
   const qrImageUrl = `https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${encodeURIComponent(qrUrl)}&color=000000&bgcolor=ffffff`;
 
@@ -72,7 +76,7 @@ const eventTicketTemplate = (registration: Registration, event: EventDetails) =>
             </td>
             <td style="padding-bottom: 25px; text-align: right;">
               <p style="margin: 0; font-size: 12px; color: #71717a; text-transform: uppercase; font-weight: 600;">Date</p>
-              <p style="margin: 5px 0 0 0; font-size: 16px; color: #18181b; font-weight: 700;">${new Date(event.date).toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata' })}</p>
+              <p style="margin: 5px 0 0 0; font-size: 16px; color: #18181b; font-weight: 700;">${new Date(event.date).toLocaleDateString("en-IN", { timeZone: "Asia/Kolkata" })}</p>
             </td>
           </tr>
           <tr>
@@ -87,12 +91,17 @@ const eventTicketTemplate = (registration: Registration, event: EventDetails) =>
           </tr>
         </table>
 
-        ${registration.additionalNames && registration.additionalNames.length > 0 ? `
+        ${
+          registration.additionalNames &&
+          registration.additionalNames.length > 0
+            ? `
         <div style="margin-top: 10px; padding-top: 20px; border-top: 1px solid #e4e4e7;">
           <p style="margin: 0; font-size: 12px; color: #71717a; text-transform: uppercase; font-weight: 600;">Additional Attendees</p>
-          <p style="margin: 5px 0 0 0; font-size: 15px; color: #27272a; font-weight: 600;">${registration.additionalNames.join(', ')}</p>
+          <p style="margin: 5px 0 0 0; font-size: 15px; color: #27272a; font-weight: 600;">${registration.additionalNames.join(", ")}</p>
         </div>
-        ` : ''}
+        `
+            : ""
+        }
       </div>
 
       <!-- Bottom Part (QR Code) -->
@@ -163,12 +172,15 @@ const rentalConfirmationTemplate = (booking: Booking, cycle: Cycle) => `
   </div>
 `;
 
-export async function sendEventRegistrationEmail(registration: Registration, event: EventDetails) {
+export async function sendEventRegistrationEmail(
+  registration: Registration,
+  event: EventDetails,
+) {
   const user = process.env.GMAIL_USER || process.env.EMAIL_USER;
   const pass = process.env.GMAIL_APP_PASSWORD || process.env.EMAIL_PASS;
 
   if (!user || !pass) {
-    console.warn('Email credentials not set, skipping email.');
+    console.warn("Email credentials not set, skipping email.");
     return;
   }
 
@@ -183,7 +195,10 @@ export async function sendEventRegistrationEmail(registration: Registration, eve
 
     // Send Self Notification (Admin)
     if (adminEmail) {
-      const attendees = [registration.name, ...(registration.additionalNames || [])].join(', ');
+      const attendees = [
+        registration.name,
+        ...(registration.additionalNames || []),
+      ].join(", ");
       await transporter.sendMail({
         from: `"Wheelo System" <${user}>`,
         to: adminEmail,
@@ -201,18 +216,23 @@ Amount: ₹${registration.amount}
         `,
       });
     }
-    console.log(`Successfully sent event registration email for ${registration.email}`);
+    console.log(
+      `Successfully sent event registration email for ${registration.email}`,
+    );
   } catch (error) {
-    console.error('Error sending event registration email:', error);
+    console.error("Error sending event registration email:", error);
   }
 }
 
-export async function sendRentalConfirmationEmail(booking: Booking, cycle: Cycle) {
+export async function sendRentalConfirmationEmail(
+  booking: Booking,
+  cycle: Cycle,
+) {
   const user = process.env.GMAIL_USER || process.env.EMAIL_USER;
   const pass = process.env.GMAIL_APP_PASSWORD || process.env.EMAIL_PASS;
 
   if (!user || !pass) {
-    console.warn('Email credentials not set, skipping email.');
+    console.warn("Email credentials not set, skipping email.");
     return;
   }
 
@@ -243,9 +263,11 @@ Transaction ID: ${booking.transactionId}
         `,
       });
     }
-    console.log(`Successfully sent rental confirmation email for ${booking.email}`);
+    console.log(
+      `Successfully sent rental confirmation email for ${booking.email}`,
+    );
   } catch (error) {
-    console.error('Error sending rental confirmation email:', error);
+    console.error("Error sending rental confirmation email:", error);
   }
 }
 
@@ -256,12 +278,14 @@ interface CustomPayment {
   transactionId: string | null;
 }
 
-export async function sendCustomPaymentNotificationEmail(payment: CustomPayment) {
+export async function sendCustomPaymentNotificationEmail(
+  payment: CustomPayment,
+) {
   const user = process.env.GMAIL_USER || process.env.EMAIL_USER;
   const pass = process.env.GMAIL_APP_PASSWORD || process.env.EMAIL_PASS;
 
   if (!user || !pass) {
-    console.warn('Email credentials not set, skipping email.');
+    console.warn("Email credentials not set, skipping email.");
     return;
   }
 
@@ -270,20 +294,22 @@ export async function sendCustomPaymentNotificationEmail(payment: CustomPayment)
       await transporter.sendMail({
         from: `"Wheelo System" <${user}>`,
         to: adminEmail,
-        subject: `New Custom Payment: ₹${payment.amount} by ${payment.name || 'Unknown'}`,
+        subject: `New Custom Payment: ₹${payment.amount} by ${payment.name || "Unknown"}`,
         text: `
 New Custom Payment Received!
 
 Details:
-Name: ${payment.name || 'N/A'}
-Phone: ${payment.phone || 'N/A'}
+Name: ${payment.name || "N/A"}
+Phone: ${payment.phone || "N/A"}
 Amount: ₹${payment.amount}
 Transaction ID: ${payment.transactionId}
         `,
       });
-      console.log(`Successfully sent custom payment notification email to admin.`);
+      console.log(
+        `Successfully sent custom payment notification email to admin.`,
+      );
     }
   } catch (error) {
-    console.error('Error sending custom payment notification email:', error);
+    console.error("Error sending custom payment notification email:", error);
   }
 }

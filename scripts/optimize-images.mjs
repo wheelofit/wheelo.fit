@@ -1,20 +1,20 @@
-import fs from 'fs/promises';
-import path from 'path';
-import sharp from 'sharp';
+import fs from "fs/promises";
+import path from "path";
+import sharp from "sharp";
 
-const PUBLIC_DIR = path.join(process.cwd(), 'public');
+const PUBLIC_DIR = path.join(process.cwd(), "public");
 
 async function ensureDir(dir) {
   try {
     await fs.mkdir(dir, { recursive: true });
   } catch (err) {
-    if (err.code !== 'EEXIST') throw err;
+    if (err.code !== "EEXIST") throw err;
   }
 }
 
 async function findImages(dir, fileList = []) {
   // Skip low and medium folders to avoid infinite loops and re-processing
-  if (dir.endsWith(path.sep + 'low') || dir.endsWith(path.sep + 'medium')) {
+  if (dir.endsWith(path.sep + "low") || dir.endsWith(path.sep + "medium")) {
     return fileList;
   }
 
@@ -26,7 +26,7 @@ async function findImages(dir, fileList = []) {
       await findImages(fullPath, fileList);
     } else {
       const ext = path.extname(file.name).toLowerCase();
-      if (['.jpg', '.jpeg', '.png', '.webp'].includes(ext)) {
+      if ([".jpg", ".jpeg", ".png", ".webp"].includes(ext)) {
         fileList.push(fullPath);
       }
     }
@@ -45,8 +45,8 @@ async function processImages() {
     const fileNameWithoutExt = path.parse(fileName).name;
     const destName = `${fileNameWithoutExt}.webp`;
 
-    const lowDir = path.join(dir, 'low');
-    const mediumDir = path.join(dir, 'medium');
+    const lowDir = path.join(dir, "low");
+    const mediumDir = path.join(dir, "medium");
 
     await ensureDir(lowDir);
     await ensureDir(mediumDir);
@@ -56,25 +56,25 @@ async function processImages() {
 
     // Skip if they already exist to save time
     try {
-        await fs.access(lowPath);
-        await fs.access(mediumPath);
-        console.log(`Skipping (already optimized): ${fileName}`);
-        continue;
+      await fs.access(lowPath);
+      await fs.access(mediumPath);
+      console.log(`Skipping (already optimized): ${fileName}`);
+      continue;
     } catch {
-        // One or both files missing, proceed to process
+      // One or both files missing, proceed to process
     }
 
     console.log(`Processing: ${sourcePath}`);
 
     try {
       // Generate Low Quality (Mobile) - 640px wide
-      await sharp(sourcePath, { failOn: 'none' })
+      await sharp(sourcePath, { failOn: "none" })
         .resize(640, null, { withoutEnlargement: true })
         .webp({ quality: 60 })
         .toFile(lowPath);
-        
+
       // Generate Medium Quality (Laptop) - 1200px wide
-      await sharp(sourcePath, { failOn: 'none' })
+      await sharp(sourcePath, { failOn: "none" })
         .resize(1200, null, { withoutEnlargement: true })
         .webp({ quality: 80 })
         .toFile(mediumPath);
@@ -83,7 +83,7 @@ async function processImages() {
     }
   }
 
-  console.log('All images processed successfully.');
+  console.log("All images processed successfully.");
 }
 
 processImages().catch(console.error);

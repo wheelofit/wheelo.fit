@@ -7,27 +7,41 @@
 }
 
 .ticket {
-  background: linear-gradient(135deg, rgba(17,31,21,0.9), rgba(9,18,11,0.95));
+  background: linear-gradient(
+    135deg,
+    rgba(17, 31, 21, 0.9),
+    rgba(9, 18, 11, 0.95)
+  );
   backdrop-filter: blur(20px);
   color: #fff;
   border-radius: 24px;
   padding: 0;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(255,255,255,0.1);
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.6),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1);
   max-width: 420px;
   width: 100%;
   position: relative;
   overflow: hidden;
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease-out;
+  transition:
+    transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    box-shadow 0.3s ease-out;
   transform-style: preserve-3d;
   margin: 0 auto;
 }
 
 .ticketFixed {
-  background: linear-gradient(135deg, rgba(17,31,21,0.9), rgba(9,18,11,0.95));
+  background: linear-gradient(
+    135deg,
+    rgba(17, 31, 21, 0.9),
+    rgba(9, 18, 11, 0.95)
+  );
   color: #fff;
   border-radius: 24px;
   padding: 0;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(255,255,255,0.1);
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.6),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1);
   width: 420px;
   min-width: 420px;
   position: relative;
@@ -41,13 +55,18 @@
 }
 
 .ticket::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;
   width: 50%;
   height: 100%;
-  background: linear-gradient(to right, transparent, rgba(255,255,255,0.05), transparent);
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.05),
+    transparent
+  );
   transform: skewX(-20deg);
   animation: shine 6s infinite;
   z-index: 3;
@@ -55,9 +74,15 @@
 }
 
 @keyframes shine {
-  0% { left: -100%; }
-  20% { left: 200%; }
-  100% { left: 200%; }
+  0% {
+    left: -100%;
+  }
+  20% {
+    left: 200%;
+  }
+  100% {
+    left: 200%;
+  }
 }
 
 .circleTopRight {
@@ -66,7 +91,7 @@
   right: -50px;
   width: 150px;
   height: 150px;
-  background: rgba(255,255,255,0.05);
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 50%;
 }
 
@@ -76,7 +101,7 @@
   left: -50px;
   width: 200px;
   height: 200px;
-  background: rgba(255,255,255,0.03);
+  background: rgba(255, 255, 255, 0.03);
   border-radius: 50%;
 }
 
@@ -84,7 +109,7 @@
   font-size: 1.8rem;
   font-weight: bold;
   margin-bottom: 1.5rem;
-  border-bottom: 1px solid rgba(255,255,255,0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   padding-bottom: 1rem;
   position: relative;
   z-index: 1;
@@ -110,7 +135,7 @@
 
 .label {
   font-size: 0.9rem;
-  color: rgba(255,255,255,0.6);
+  color: rgba(255, 255, 255, 0.6);
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-bottom: 0.25rem;
@@ -137,7 +162,7 @@
 }
 
 .admitBadge {
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
   padding: 0.5rem 1rem;
   border-radius: 8px;
   text-align: center;
@@ -157,18 +182,19 @@
   align-items: center;
   position: relative;
   z-index: 1;
-  border-top: 2px dashed rgba(255,255,255,0.2);
+  border-top: 2px dashed rgba(255, 255, 255, 0.2);
 }
 
-.footer::before, .footer::after {
-  content: '';
+.footer::before,
+.footer::after {
+  content: "";
   position: absolute;
   top: -15px;
   width: 30px;
   height: 30px;
   background-color: var(--background, #09120b);
   border-radius: 50%;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
 .footer::before {
@@ -203,14 +229,18 @@
   align-items: center;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .downloadBtn {
   padding: 1rem 2.5rem;
   font-size: 1.2rem;
   font-weight: 800;
-  background: linear-gradient(90deg, var(--primary, #1eb53a), var(--secondary, #28d648));
+  background: linear-gradient(
+    90deg,
+    var(--primary, #1eb53a),
+    var(--secondary, #28d648)
+  );
   color: #fff;
   border: none;
   border-radius: 12px;
@@ -242,30 +272,30 @@
   .responsiveWrapper .ticketInner {
     padding: 1.5rem;
   }
-  
+
   .responsiveWrapper .header {
     font-size: 1.5rem;
   }
-  
+
   .responsiveWrapper .row {
     flex-direction: column;
     gap: 1rem;
   }
-  
+
   .responsiveWrapper .alignRight {
     text-align: left;
   }
-  
+
   .responsiveWrapper .attendeesRow {
     flex-direction: column;
     align-items: flex-start;
   }
-  
+
   .responsiveWrapper .footer {
     flex-direction: column;
     padding: 1rem;
   }
-  
+
   .responsiveWrapper .ticketCodeValue {
     font-size: 1.2rem;
   }

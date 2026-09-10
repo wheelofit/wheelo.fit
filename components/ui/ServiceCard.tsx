@@ -1,7 +1,7 @@
-import React from 'react';
-import Link from 'next/link';
-import { OptimizedImage as Image } from '@/components/ui/OptimizedImage';
-import styles from './ServiceCard.module.css';
+import React from "react";
+import Link from "next/link";
+import { OptimizedImage as Image } from "@/components/ui/OptimizedImage";
+import styles from "./ServiceCard.module.css";
 
 interface ServiceCardProps {
   title: string;
@@ -11,11 +11,23 @@ interface ServiceCardProps {
   href?: string;
 }
 
-export function ServiceCard({ title, description, image, href }: ServiceCardProps) {
+export function ServiceCard({
+  title,
+  description,
+  image,
+  href,
+}: ServiceCardProps) {
   const CardContent = (
     <div className={styles.card}>
       <div className={styles.imageContainer}>
-        <Image src={image} alt={title} className={styles.image} fill sizes="(max-width: 768px) 100vw, 33vw" style={{ objectFit: 'cover' }} />
+        <Image
+          src={image}
+          alt={title}
+          className={styles.image}
+          fill
+          sizes="(max-width: 768px) 100vw, 33vw"
+          style={{ objectFit: "cover" }}
+        />
         <div className={styles.overlay} />
       </div>
       <div className={styles.content}>
@@ -27,8 +39,10 @@ export function ServiceCard({ title, description, image, href }: ServiceCardProp
   );
 
   return href ? (
-    <Link href={href} style={{ textDecoration: 'none' }}>
+    <Link href={href} style={{ textDecoration: "none" }}>
       {CardContent}
     </Link>
-  ) : CardContent;
+  ) : (
+    CardContent
+  );
 }

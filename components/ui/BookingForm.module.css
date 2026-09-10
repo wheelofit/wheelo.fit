@@ -32,7 +32,8 @@
   font-weight: 500;
 }
 
-.input, .select {
+.input,
+.select {
   background: rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 12px;
@@ -43,7 +44,8 @@
   transition: all 0.3s ease;
 }
 
-.input:focus, .select:focus {
+.input:focus,
+.select:focus {
   outline: none;
   border-color: var(--primary);
   box-shadow: 0 0 0 2px rgba(30, 181, 58, 0.2);
