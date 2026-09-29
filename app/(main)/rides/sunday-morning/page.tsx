@@ -123,7 +123,8 @@ export default async function SundayMorningPage() {
       </div>
       <div className={styles.timelineItem}>
         <span className={styles.timelineTime}>07:30 AM</span>
-        Enjoy the view of Worli Promenade followed by a photo session with group. By heading towards Shivaji Park.
+        Enjoy the view of Worli Promenade followed by a photo session with
+        group. By heading towards Shivaji Park.
       </div>
       <div className={styles.timelineItem}>
         <span className={styles.timelineTime}>08:45 AM</span>
