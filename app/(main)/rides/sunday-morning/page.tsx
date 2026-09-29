@@ -313,7 +313,7 @@ export default async function SundayMorningPage() {
         itinerary={itinerary}
         additionalSections={additionalSections}
         sliderImages={sliderImages}
-        priceText="₹649"
+        priceText={`₹${globalPrice}`}
         bookingForm={
           <BookingForm
             key="booking-form"

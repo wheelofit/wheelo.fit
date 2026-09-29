@@ -331,7 +331,7 @@ export default async function MidnightRidesPage() {
         itinerary={itinerary}
         additionalSections={additionalSections}
         sliderImages={sliderImages}
-        priceText="₹749"
+        priceText={`₹${globalPrice}`}
         bookingForm={
           <BookingForm
             key="booking-form"
