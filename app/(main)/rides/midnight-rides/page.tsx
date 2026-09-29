@@ -53,7 +53,7 @@ export default async function MidnightRidesPage() {
     where: { eventType: "MIDNIGHT", price: { gt: 0 } },
     orderBy: { updatedAt: "desc" },
   });
-  const globalPrice = globalEvent?.price || 749;
+  const globalPrice = globalEvent?.price || 549;
 
   const events = dbEvents.map((e) => ({
     id: e.id,

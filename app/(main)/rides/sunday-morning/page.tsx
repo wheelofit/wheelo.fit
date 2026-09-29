@@ -45,7 +45,7 @@ export default async function SundayMorningPage() {
     where: { eventType: "SUNDAY", price: { gt: 0 } },
     orderBy: { updatedAt: "desc" },
   });
-  const globalPrice = globalEvent?.price || 649;
+  const globalPrice = globalEvent?.price || 549;
 
   const events = dbEvents.map((e) => ({
     id: e.id,
