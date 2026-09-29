@@ -7,27 +7,42 @@ async function main() {
 
   const today = new Date();
 
-  // Find the next Saturday
-  const nextSaturday = new Date(today);
-  nextSaturday.setDate(today.getDate() + ((6 - today.getDay() + 7) % 7 || 7));
-  nextSaturday.setHours(23, 0, 0, 0);
-
-  // Find the next Sunday
-  const nextSunday = new Date(today);
-  nextSunday.setDate(today.getDate() + ((0 - today.getDay() + 7) % 7 || 7));
-  nextSunday.setHours(6, 0, 0, 0);
-
-  const events = [];
-
+  const events: any[] = [];
   for (let i = 0; i < 16; i++) {
-    // Midnight ride (Saturday night)
-    const midnightDate = new Date(nextSaturday);
-    midnightDate.setDate(nextSaturday.getDate() + i * 7);
+    // Find the next Friday
+    const nextFriday = new Date(today);
+    nextFriday.setDate(today.getDate() + ((5 - today.getDay() + 7) % 7 || 7));
+    nextFriday.setHours(22, 45, 0, 0);
+
+    // Find the next Saturday
+    const nextSaturday = new Date(today);
+    nextSaturday.setDate(today.getDate() + ((6 - today.getDay() + 7) % 7 || 7));
+    nextSaturday.setHours(22, 45, 0, 0);
+
+    // Find the next Sunday
+    const nextSunday = new Date(today);
+    nextSunday.setDate(today.getDate() + ((0 - today.getDay() + 7) % 7 || 7));
+    nextSunday.setHours(6, 45, 0, 0);
+
+    // Midnight ride (Friday night)
+    const midnightFriday = new Date(nextFriday);
+    midnightFriday.setDate(nextFriday.getDate() + i * 7);
     events.push({
       title: "Mumbai Midnight Cycling",
       eventType: "MIDNIGHT",
-      date: midnightDate,
-      timeSlot: "11:00 PM - 3:30 AM",
+      date: midnightFriday,
+      timeSlot: "10:45 PM - 03:30 AM",
+      isActive: true,
+    });
+
+    // Midnight ride (Saturday night)
+    const midnightSaturday = new Date(nextSaturday);
+    midnightSaturday.setDate(nextSaturday.getDate() + i * 7);
+    events.push({
+      title: "Mumbai Midnight Cycling",
+      eventType: "MIDNIGHT",
+      date: midnightSaturday,
+      timeSlot: "10:45 PM - 03:30 AM",
       isActive: true,
     });
 
@@ -38,7 +53,7 @@ async function main() {
       title: "Sunday Morning Coastal Ride",
       eventType: "SUNDAY",
       date: sundayDate,
-      timeSlot: "06:00 AM - 08:30 AM",
+      timeSlot: "06:45 AM - 09:00 AM",
       isActive: true,
     });
   }

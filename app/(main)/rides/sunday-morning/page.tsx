@@ -94,9 +94,9 @@ export default async function SundayMorningPage() {
       <div className={styles.incCard}>
         <h3>Inclusions</h3>
         <ul className={`${styles.list} ${styles.incList}`}>
-          <li>Geared Bicycle</li>
+          <li>Non-Gear or Geared cycle</li>
           <li>Helmet</li>
-          <li>Refreshing Morning Drink / Breakfast</li>
+          <li>Refreshing juice bottle</li>
           <li>First Aid & Mechanical Support</li>
         </ul>
       </div>
@@ -123,7 +123,7 @@ export default async function SundayMorningPage() {
       </div>
       <div className={styles.timelineItem}>
         <span className={styles.timelineTime}>07:30 AM</span>
-        Breakfast break at a famous local spot.
+        Enjoy the view of Worli Promenade followed by a photo session with group. By heading towards Shivaji Park.
       </div>
       <div className={styles.timelineItem}>
         <span className={styles.timelineTime}>08:45 AM</span>
