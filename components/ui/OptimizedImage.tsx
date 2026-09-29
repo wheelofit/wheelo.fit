@@ -55,7 +55,7 @@ export function OptimizedImage({
     // Decode first in case the consumer already called encodeURI
     try {
       srcString = decodeURI(srcString);
-    } catch (e) {
+    } catch {
       // Ignore malformed URI
     }
 

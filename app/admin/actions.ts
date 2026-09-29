@@ -27,7 +27,7 @@ export async function login(formData: FormData) {
     password = CryptoJS.AES.decrypt(encPassword, key).toString(
       CryptoJS.enc.Utf8,
     );
-  } catch (e) {
+  } catch {
     return { error: "Decryption failed" };
   }
 

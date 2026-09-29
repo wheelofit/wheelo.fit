@@ -18,7 +18,7 @@ async function main() {
   currentWeekMonday.setDate(istTime.getDate() + diffToMonday);
   currentWeekMonday.setHours(0, 0, 0, 0); // Midnight IST
 
-  const events: any[] = [];
+  const events: { title: string; eventType: string; date: Date; timeSlot: string; isActive: boolean; }[] = [];
   
   for (let i = 0; i < 16; i++) {
     // Current week's Monday + offset for Friday, Saturday, Sunday
