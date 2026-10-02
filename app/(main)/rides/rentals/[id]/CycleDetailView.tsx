@@ -149,6 +149,8 @@ export default function CycleDetailView({ cycle }: { cycle: CycleData }) {
                       width: "100%",
                       maxHeight: "350px",
                       objectFit: "contain",
+                      mixBlendMode: "multiply",
+                      transform: "scale(1.35)",
                     }}
                   />
                 ) : (
