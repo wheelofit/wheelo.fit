@@ -47,22 +47,30 @@ async function scrape() {
       .map((a) => {
         const parts = a.href.split("/reel/");
         const shortcode = parts.length > 1 ? parts[1].replace("/", "") : null;
-        
+
         // Match <img> src OR background-image: url(&quot;...&quot;)
-        const imgMatch = a.innerHTML.match(/src="([^"]+)"/) || a.innerHTML.match(/background-image:\s*url\((?:&quot;|"|')?([^"'\)]+)(?:&quot;|"|')?\)/);
+        const imgMatch =
+          a.innerHTML.match(/src="([^"]+)"/) ||
+          a.innerHTML.match(
+            /background-image:\s*url\((?:&quot;|"|')?([^"'\)]+)(?:&quot;|"|')?\)/,
+          );
         const src = imgMatch ? imgMatch[1].replace(/&amp;/g, "&") : null;
-        
+
         const altMatch = a.innerHTML.match(/alt="([^"]+)"/);
         const alt = altMatch ? altMatch[1] : "";
-        
+
         // Instagram hides likes/comments from public unauthenticated scraping
         // We generate deterministic realistic numbers based on the shortcode
         // so they stay consistent for the same reel
-        const hash = shortcode ? shortcode.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) : 0;
-        const fakeLikes = 150 + (hash % 850); 
+        const hash = shortcode
+          ? shortcode
+              .split("")
+              .reduce((acc, char) => acc + char.charCodeAt(0), 0)
+          : 0;
+        const fakeLikes = 150 + (hash % 850);
         const fakeComments = 10 + (hash % 90);
 
-        const isPinned = a.innerHTML.includes('Pinned post icon');
+        const isPinned = a.innerHTML.includes("Pinned post icon");
 
         return {
           id: shortcode,
@@ -72,7 +80,7 @@ async function scrape() {
           likes: fakeLikes,
           comments: fakeComments,
           timestamp: new Date().toISOString(),
-          isPinned
+          isPinned,
         };
       })
       .filter((r) => r.id && r.image && !r.isPinned);
