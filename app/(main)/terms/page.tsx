@@ -77,10 +77,10 @@ export default function TermsAndConditions() {
         </p>
         <ul>
           <li>
-            <strong>Cancellations:</strong> You may cancel a booking up to 12
-            hours before the scheduled start time for a full refund or credit.
-            Cancellations made within 12 hours of the start time are
-            non-refundable.
+            <strong>Cancellations:</strong> You may cancel a booking up to 2
+            days before the scheduled start time for a full refund or
+            rescheduling. Cancellations made within 2 days of the start time are
+            non-refundable and non-transferable.
           </li>
           <li>
             <strong>No Shows:</strong> Failure to attend a booked class or ride

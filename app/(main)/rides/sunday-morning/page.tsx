@@ -196,6 +196,11 @@ export default async function SundayMorningPage() {
               Participants are responsible for any damage caused to rented
               cycles during the ride.
             </li>
+            <li>
+              You may cancel a booking up to 2 days before the scheduled start
+              time for a full refund or rescheduling. Cancellations made within 2
+              days of the start time are non-refundable and non-transferable.
+            </li>
           </ul>
         </div>
       ),
